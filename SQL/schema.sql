@@ -71,3 +71,66 @@ create table hash_tag (
 );
 
 
+-- 팔로우
+CREATE TABLE follow(
+	id bigint auto_increment NOT NULL PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	other_id BIGINT NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+	FOREIGN KEY(other_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 북마크
+CREATE TABLE bookmark(
+	bookmark_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	article_id BIGINT NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+	FOREIGN KEY(article_id) REFERENCES post(id) ON DELETE CASCADE
+);
+
+-- 좋아요
+CREATE TABLE likes(
+	id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	article_id BIGINT NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+	FOREIGN KEY(article_id) REFERENCES post(id) ON DELETE CASCADE
+);
+
+-- 소셜피드 테이블 
+CREATE TABLE social_feed 
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    author BIGINT NOT NULL, -- users table (user_id)
+    createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    post_id BIGINT NOT NULL, -- post table 
+    follow_id BIGINT NOT NULL, -- follow table 
+    PRIMARY KEY(id),
+    FOREIGN KEY(author) REFERENCES users(id),
+    FOREIGN KEY(post_id) REFERENCES post(id),
+    FOREIGN KEY(follow_id) REFERENCES follow(id)
+);
+
+-- 친구태그 테이블
+CREATE TABLE friend_tag 
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    tag_name VARCHAR(255) NOT NULL,
+    user_id BIGINT NOT NULL, -- users table (id)
+    post_id BIGINT NOT NULL, -- post table 
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(post_id) REFERENCES post(id)
+);
+
+-- 해시태그 테이블
+create table hash_tag (
+    id BIGINT not null AUTO_INCREMENT,
+    tag_content VARCHAR(255) NOT NULL, 
+    author BIGINT NOT NULL, -- users table (id)
+    post_id BIGINT NOT NULL, -- post table
+    PRIMARY KEY(id),
+    FOREIGN KEY(author) REFERENCES users(id),
+    FOREIGN KEY(post_id) REFERENCES post(id)
+);
