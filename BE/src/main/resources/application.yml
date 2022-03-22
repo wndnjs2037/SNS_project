@@ -2,9 +2,8 @@ spring:
   profiles:
     group:
       local: local-db
-  devtools:
-    livereload:
-      enabled: true
   mvc:
     view:
       suffix: .html
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml

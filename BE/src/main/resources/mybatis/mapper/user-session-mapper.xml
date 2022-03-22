@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codepresso.team2app.repository.UserSessionRepository">
+  <select id="findByEmail" resultType="com.codepresso.team2app.domain.UserSession">
+    SELECT *
+    FROM user_session
+    WHERE id = #{email};
+  </select>
+  <insert id="save">
+    INSERT INTO user_session(email, name)
+    VALUES (#{user_session.email}, #{user_session.name});
+    <selectKey keyProperty="user_session.id" resultType="Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <delete id="deleteByEmail">
+    DELETE FROM user_session
+    WHERE id=#{email};
+  </delete>
+</mapper>
