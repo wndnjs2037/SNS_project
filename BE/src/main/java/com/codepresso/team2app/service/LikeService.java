@@ -23,4 +23,5 @@ public class LikeService {
         return result == 1;
     }
 
+
 }

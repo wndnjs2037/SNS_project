@@ -17,4 +17,9 @@
         WHERE id = #{id};
     </select>
 
+    <select id="findPostComment" resultType="com.codepresso.team2app.vo.Comment">
+        select comment.* from comment join post
+        on post.id = comment.post_id and comment.post_id = #{id};
+    </select>
+
 </mapper>

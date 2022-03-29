@@ -11,4 +11,5 @@ public interface CommentRepository {
     Integer saveComment(@Param("comment") Comment comment);
     List<Comment> findAllComment();
     Comment findOneComment(@Param("id") Long id);
+    List<Comment> findPostComment(@Param("id") Long id);
 }

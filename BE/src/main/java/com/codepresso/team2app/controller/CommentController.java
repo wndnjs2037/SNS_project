@@ -20,7 +20,7 @@ public class CommentController {
     @PostMapping("/comment")
     public String createComment(@RequestBody CommentRequestDto commentRequestDto) {
         Comment comment = commentRequestDto.getComment();
-        commentService.saveComment(comment);
+        commentService.saveComment(comment, comment.getPostId());
         long idx = comment.getIdx();
         System.out.println(idx);
 
@@ -51,5 +51,11 @@ public class CommentController {
     public Comment getOneComment(@RequestParam("id") Long id) {
         Comment comment = commentService.getOneComment(id);
         return comment;
+    }
+
+    @GetMapping("/comment/post")
+    public List<Comment> getPostComment(@RequestParam("id") Long id) {
+        List<Comment> commentList = commentService.getPostComment(id);
+        return commentList;
     }
 }

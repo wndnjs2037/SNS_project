@@ -18,6 +18,7 @@ public class Post {
     Long countRevogel;
     Long countComment;
     Long revogelPostId;
+    Boolean isVisible;
     Long idx;
 
     public Post(Long id, Long author, String content) {
@@ -26,7 +27,7 @@ public class Post {
         this.content = content;
     }
 
-    public Post(Long id, Long author, String content, Date createdAt, Long countLiked, Long countRevogel, Long countComment, Long revogelPostId) {
+    public Post(Long id, Long author, String content, Date createdAt, Long countLiked, Long countRevogel, Long countComment, Long revogelPostId, Boolean isVisible) {
         this.id = id;
         this.author = author;
         this.content = content;
@@ -35,6 +36,7 @@ public class Post {
         this.countRevogel = countRevogel;
         this.countComment = countComment;
         this.revogelPostId = revogelPostId;
+        this.isVisible = isVisible;
     }
 
     public void postInfo(){

@@ -5,6 +5,7 @@ import com.codepresso.team2app.controller.dto.PostRequestDto;
 import com.codepresso.team2app.controller.dto.PostResponseDto;
 import com.codepresso.team2app.service.PostService;
 import com.codepresso.team2app.vo.*;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,8 +68,8 @@ public class PostController {
     }
 
     @GetMapping("/post/all")
-    public List<PostResponseDto> getAllPostList() {
-        List<Post> postList = postService.getAllPost();
+    public List<PostResponseDto> getAllPostList(@RequestParam("id") Long id) {
+        List<Post> postList = postService.getAllPost(id);
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         for(Post post : postList){
             postResponseDtos.add(new PostResponseDto(post));
@@ -83,7 +84,7 @@ public class PostController {
         return list;
     }
 
-    @PutMapping("/post")
+    @PutMapping("/post/like")
     public String updateLikeCount(@RequestParam("id") Long id) {
         List<Post> list = postService.getOnePost(id);
 
@@ -97,5 +98,24 @@ public class PostController {
 
         postService.updateLike(post);
         return "Success";
+    }
+
+    @PutMapping("post")
+    public String updatePostContent(@RequestBody PostRequestDto postRequestDto) {
+        Post post = postRequestDto.getPost();
+        postService.updateContent(post);
+        return "success";
+    }
+
+    @PutMapping("post/delete")
+    public String updateNoVisible(@RequestParam("id") Long id) {
+        postService.noVisiblePost(id);
+        return "Success";
+    }
+
+    @GetMapping("post/author")
+    public List<Post> getFindByAuthor(@RequestParam("author") Long author) {
+        List<Post> postList = postService.getFindByAuthor(author);
+        return postList;
     }
 }

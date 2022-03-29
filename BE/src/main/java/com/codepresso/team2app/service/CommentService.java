@@ -2,8 +2,10 @@ package com.codepresso.team2app.service;
 
 import com.codepresso.team2app.repository.CommentRepository;
 import com.codepresso.team2app.repository.HashTagRepositroy;
+import com.codepresso.team2app.repository.PostRepository;
 import com.codepresso.team2app.vo.Comment;
 import com.codepresso.team2app.vo.HashTag;
+import com.codepresso.team2app.vo.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,13 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CommentService {
+    PostRepository postRepository;
     CommentRepository commentRepository;
     HashTagRepositroy hashTagRepositroy;
 
-    public boolean saveComment(Comment comment) {
+    public boolean saveComment(Comment comment, Long id) {
         Integer result = commentRepository.saveComment(comment);
+        postRepository.updateCountComment(id);
         return result == 1;
     }
 
@@ -32,5 +36,10 @@ public class CommentService {
     public Comment getOneComment(Long id) {
         Comment comment = commentRepository.findOneComment(id);
         return comment;
+    }
+
+    public List<Comment> getPostComment(Long id) {
+        List<Comment> commentList = commentRepository.findPostComment(id);
+        return commentList;
     }
 }

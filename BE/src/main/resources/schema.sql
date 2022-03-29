@@ -24,6 +24,7 @@ CREATE TABLE post
     count_revogel BIGINT NOT NULL DEFAULT 0,
     count_comment BIGINT NOT NULL DEFAULT 0,
     revogel_post_id BIGINT,
+    is_visible BOOLEAN DEFAULT TRUE,
     PRIMARY KEY(id),
     FOREIGN KEY(author) REFERENCES users(id)
 );

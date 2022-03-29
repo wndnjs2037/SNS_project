@@ -41,8 +41,8 @@ public class PostService {
         return result == 1;
     }
 
-    public List<Post> getAllPost() {
-        return postRepository.findAllPost();
+    public List<Post> getAllPost(long id) {
+        return postRepository.findAllPost(id);
     }
 
     public boolean countSave(Like like) { //insert 쿼리
@@ -59,5 +59,17 @@ public class PostService {
         return postRepository.findOnePost(id);
     }
 
+    public boolean updateContent(Post post) {
+        Integer result = postRepository.updateContent(post);
+        return result == 1;
+    }
 
+    public boolean noVisiblePost(Long id) {
+        Integer result = postRepository.noVisiblePost(id);
+        return result == 1;
+    }
+
+    public List<Post> getFindByAuthor(Long author){
+        return postRepository.findByAuthor(author);
+    }
 }
