@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class User {
-  private Integer id;
+  private Long id;
   private String email;
   private String name;
   private String password;
-  private Boolean isActive;
   private LocalDateTime createdAt;
+  private Boolean isActive;
   private String profile;
-  private Integer followingCount;
-  private Integer followerCount;
+  private Long followingCount;
+  private Long followerCount;
 }

@@ -5,11 +5,11 @@
 <mapper namespace="com.codepresso.team2app.repository.UserRepository">
   <select id="findByEmail" resultType="com.codepresso.team2app.domain.User">
     SELECT *
-    FROM user
+    FROM users
     WHERE email = #{email}
   </select>
   <insert id="save">
-    INSERT INTO user(email, name, password, profile)
+    INSERT INTO users(email, name, password, profile)
     VALUES (#{user.email}, #{user.name}, #{user.password}, #{user.profile});
   </insert>
 </mapper>

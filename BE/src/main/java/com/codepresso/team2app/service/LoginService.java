@@ -1,8 +1,8 @@
 package com.codepresso.team2app.service;
 
+import com.codepresso.team2app.controller.dto.LoginDto;
 import com.codepresso.team2app.domain.User;
 import com.codepresso.team2app.repository.UserRepository;
-import com.codepresso.team2app.service.dto.request.LoginDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
