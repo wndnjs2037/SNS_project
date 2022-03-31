@@ -12,11 +12,13 @@ public class LoginService {
 
   private final UserRepository userRepository;
 
-  public boolean login(LoginDto dto) {
+  public String login(LoginDto dto) {
     User user = userRepository.findByEmail(dto.getEmail());
-    if (user.getPassword().equals(dto.getPassword())) {
-      return true;
+    String params = null;
+    if(user.getEmail().equals(dto.getEmail()) &&
+    user.getPassword().equals(dto.getPassword())){
+      params = String.format("?id=%d", user.getId());
     }
-    return false;
+    return params;
   }
 }

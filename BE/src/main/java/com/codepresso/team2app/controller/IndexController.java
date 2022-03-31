@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -24,11 +25,13 @@ public class IndexController {
   private CommentService commentService;
 
   @PostMapping("/login")
-  public RedirectView loginApi(LoginDto dto){
-    if(loginService.login(dto)){
-      return new RedirectView("/main");
+  public String loginApi(LoginDto dto, RedirectAttributes redirectAttributes){
+    String params = loginService.login(dto);
+    if(params == null){
+      redirectAttributes.addAttribute("message", "아이디 혹은 비밀번호가 틀립니다.");
+      return "redirect:/login";
     }
-    return new RedirectView("/login");
+    return "redirect:/main" + params;
   }
 
   @GetMapping("/login")
@@ -37,13 +40,11 @@ public class IndexController {
   }
 
   @GetMapping("/main")
-  public String index(Model model, long id, long postId) {
+  public String index(Model model, @RequestParam Long id) {
     List<Post> postList = postService.getAllPost(id);
     // 로그인을 누르면 Id 값을 넘겨줘야 함 (userId)
-    List<Comment> commentList = commentService.getPostComment(postId);
     // 로그인을 누르면 Id 값을 넘겨줘야 함 (postId)
     model.addAttribute("postList", postList);
-    model.addAttribute("commentList", commentList);
     return "main";
   }
 
