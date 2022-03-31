@@ -1,5 +1,3 @@
-INSERT INTO user (email, name, password, is_active, created_at, profile)
-VALUES ('codepresso@naver.com', 'codepresso', '1234', FALSE, CURRENT_TIMESTAMP, 'Intro');
 insert into users(email, name, password, profile_message)
 values ('1@codepresso.kr', 'user1', '1111',  'hello');
 insert into users(email, name, password, profile_message)
