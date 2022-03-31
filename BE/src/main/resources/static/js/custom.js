@@ -30,39 +30,39 @@ Version: 1.0
 					slidesToShow: 4.2,
 					slidesToScroll: 4.2,
 					responsive: [
-					  {
-						breakpoint: 1024,
-						settings: {
-						  slidesToShow: 4.5,
-						  slidesToScroll: 4.5,
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 4.5,
+								slidesToScroll: 4.5,
+							}
+						},
+						{
+							breakpoint: 680,
+							settings: {
+								slidesToShow: 2.5,
+								slidesToScroll: 2.5
+							}
+						},
+						{
+							breakpoint: 520,
+							settings: {
+								slidesToShow: 3.5,
+								slidesToScroll: 3.5
+							}
+						},
+						{
+							breakpoint: 422,
+							settings: {
+								slidesToShow: 2.5,
+								slidesToScroll: 2.5
+							}
 						}
-					  },
-					  {
-						breakpoint: 680,
-						settings: {
-						  slidesToShow: 2.5,
-						  slidesToScroll: 2.5
-						}
-					  },
-					  {
-						breakpoint: 520,
-						settings: {
-						  slidesToShow: 3.5,
-						  slidesToScroll: 3.5
-						}
-					  },
-					  {
-						breakpoint: 422,
-						settings: {
-						  slidesToShow: 2.5,
-						  slidesToScroll: 2.5
-						}
-					  }
 					]
-				  });
+				});
 			},
 
-			
+
 
 		}
 	}
@@ -79,7 +79,7 @@ Version: 1.0
 //
 // 	$.ajax({
 // 		method: "GET",
-// 		url : "/post/all?id=" + id,
+// 		url : "/main?id=" + id,
 // 		contentType: "application/json"
 // 	})
 // 		.done(function (response){
@@ -111,77 +111,91 @@ $("#follow").click(function () {
 	console.log("follow click");
 });
 
-$("#updatePost").click(function (){
+$("a[name='updatePost']").click(function (){
 	console.log("update click");
-	var content = $("#updateText").val();
-	var id = $("#postId").val();
 
-	$.ajax({
-		method: "PUT",
-		url :"/post",
-		data: JSON.stringify({
-			"content" :content,
-			"id" : id
-		}),
-		contentType:"application/json"
-	})
-		.done(function (response) {
-			console.log(id);
-			window.location.reload();
-		});
+// 	var content = $("#updateText").val();
+// 	var id = parseInt($(this).attr("id"));
+// 	var postId = document.getElementsByName("postId")[id].value;
+//
+//
+// //수정 필요 updateModal 내부에  th:attrappend="id=${postStat.index}"가 필요한가?
+// 	$.ajax({
+// 		method: "PUT",
+// 		url :"/post",
+// 		data: JSON.stringify({
+// 			"content" :content,
+// 			"id" : postId
+// 		}),
+// 		contentType:"application/json"
+// 	})
+// 		.done(function (response) {
+// 			console.log(id);
+// 			window.location.reload();
+// 		});
 });
 
-$("#deletePost").click(function (){
-	console.log("delete click");
-	var id = $("#postId").val();
+$("a[name='deletePost']").click(function (){
+
+	var userId = $("#user_id").val();
+	var id = parseInt($(this).attr("id"));
+
+	var deletePostCnt = parseInt($("div[id='feed']").attr("deletePostCnt"));
+	console.log("delete deletePostCnt : ", deletePostCnt);
+	var postId = document.getElementsByName("postId")[id].value;
+
+	console.log("delete click : ", postId);
 
 	$.ajax({
 		method:"PUT",
-		url:"/post/delete?id=" + id,
+		url:"/post/delete?id=" + postId,
+		contentType:"application/json"
+	}).done(function (response){
+		window.location.reload();
+	});
+
+	var deletePostCnt = parseInt($("div[id='feed']").attr("deletePostCnt"));
+	var cnt = deletePostCnt + 1;
+	$("div[id='feed']").attr("deletePostCnt", cnt);
+	//새로고침 후 값 증가시키는 방법
+});
+
+$("a[name='moveProfile']").click(function (){
+	console.log("move profile");
+	var id = parseInt($(this).attr("id"));
+	var author = document.getElementsByName("postAuthor")[id].value;
+	console.log(author);
+
+	window.location.href = "/profile?id=" + author;
+});
+
+$("a[name='moveMyProfile']").click(function (){
+	var id = $("#user_id").val();
+
+	window.location.href = "/profile?id=" + id;
+});
+
+$("a[name='moveIndex']").click(function (){
+	console.log("cliked")
+	var id = $("#user_id").val();
+	console.log(id);
+	window.location.href = "/main?id=" + id;
+});
+
+$("a[name='liked']").click(function (){
+
+	var id = parseInt($(this).attr("id"));
+	var postId = document.getElementsByName("postId")[id].value;
+
+	console.log(id);
+	console.log(postId);
+
+	$.ajax({
+		method :"PUT",
+		url : "/post/like?id=" + postId,
 		contentType:"application/json"
 	})
 		.done(function (response){
 			window.location.reload();
 		})
-});
-
-$("#moveProfile").click(function (){
-	console.log("move profile");
-	var id = $("#postAuthor").val();
-
-	window.location.href = "/profile?id=" + id;
-});
-
-$("#moveMyProfile").click(function (){
-	var id = $("#user_id").val();
-
-	window.location.href = "/profile?id=" + id;
-});
-
-$("#moveIndex").click(function (){
-	console.log("cliked")
-	var id = $("#user_id").val();
-	window.location.href = "/index?id=" + id + "&postId=1";
-});
-
-$("button[name='liked']").click(function (){
-
-	var id = $("input[name='postId']").val();
-	var cid = $("input[name='postId']").length;
-	console.log(cid);
-	var grparr = new Array(cid);
-
-	for(var i = 0; i < cid; i++){
-		grparr[i] = $("input[name='postId']").eq(i).val();
-		console.log(grparr[i]);
-	}
-
-	// $.ajax({
-	// 	method :"PUT",
-	// 	url : "/post/like?id=" + id,
-	// 	contentType:"application/json"
-	// })
-	// 	.done(function (response){
-	// 		window.location.reload();
-	// 	})
 });

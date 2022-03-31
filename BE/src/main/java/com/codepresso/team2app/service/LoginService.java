@@ -12,11 +12,19 @@ public class LoginService {
 
   private final UserRepository userRepository;
 
-  public boolean login(LoginDto dto) {
+//  public boolean login(LoginDto dto) {
+//    User user = userRepository.findByEmail(dto.getEmail());
+//    if (user.getPassword().equals(dto.getPassword())) {
+//      return true;
+//    }
+//    return false;
+//  }
+
+  public long login(LoginDto dto) {
     User user = userRepository.findByEmail(dto.getEmail());
     if (user.getPassword().equals(dto.getPassword())) {
-      return true;
+      return user.getId();
     }
-    return false;
+    return 0;
   }
 }
