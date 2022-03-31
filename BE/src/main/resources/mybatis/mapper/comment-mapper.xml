@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.team2app.repository.CommentRepository">
+    <insert id="saveComment" parameterType="com.codepresso.team2app.vo.Comment" useGeneratedKeys="true" keyProperty="idx">
+        insert into comment(author, content, post_id)
+        values (#{comment.author}, #{comment.content}, #{comment.postId});
+    </insert>
+
+    <select id="findAllComment" resultType="com.codepresso.team2app.vo.Comment">
+        SELECT * FROM comment;
+    </select>
+
+    <select id="findOneComment" resultType="com.codepresso.team2app.vo.Comment">
+        SELECT * FROM comment
+        WHERE id = #{id};
+    </select>
+
+    <select id="findPostComment" resultType="com.codepresso.team2app.vo.Comment">
+        select comment.* from comment join post
+        on post.id = comment.post_id and comment.post_id = #{id};
+    </select>
+
+</mapper>

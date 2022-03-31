@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.team2app.repository.FriendTagRepository">
+    <insert id="saveFriendTag">
+        insert into friend_tag(tag_name, user_id, post_id)
+        values (#{FriendTag.tag_name}, #{FriendTag.user_id}, #{FriendTag.post_id});
+    </insert>
+
+    <select id="findFriendTag" resultType="com.codepresso.team2app.vo.FriendTag">
+        SELECT * FROM friend_tag;
+    </select>
+</mapper>

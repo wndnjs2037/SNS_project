@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.team2app.repository.HashTagRepositroy">
+    <insert id="saveHashTag" parameterType="com.codepresso.team2app.vo.HashTag" useGeneratedKeys="true" keyProperty="tagIdx">
+        insert into hash_tag(tag_content, post_id, comment_id)
+        values (#{HashTag.tagContent}, #{HashTag.postId}, #{HashTag.commentId});
+    </insert>
+
+    <select id="findHashTag" resultType="com.codepresso.team2app.vo.HashTag">
+        SELECT * FROM HASH_TAG;
+    </select>
+</mapper>
