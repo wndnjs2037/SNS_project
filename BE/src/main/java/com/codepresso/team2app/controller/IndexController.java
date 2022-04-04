@@ -1,9 +1,11 @@
 package com.codepresso.team2app.controller;
 
 import com.codepresso.team2app.controller.dto.LoginDto;
+import com.codepresso.team2app.domain.User;
 import com.codepresso.team2app.service.CommentService;
 import com.codepresso.team2app.service.LoginService;
 import com.codepresso.team2app.service.PostService;
+import com.codepresso.team2app.service.UserService;
 import com.codepresso.team2app.vo.Comment;
 import com.codepresso.team2app.vo.Post;
 import lombok.AllArgsConstructor;
@@ -19,17 +21,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@AllArgsConstructor
 public class IndexController {
   private PostService postService;
   private LoginService loginService;
   private CommentService commentService;
+  private UserService userService;
+
+  public IndexController(PostService postService, LoginService loginService, CommentService commentService, UserService userService) {
+    this.postService = postService;
+    this.loginService = loginService;
+    this.commentService = commentService;
+    this.userService = userService;
+  }
+
+  Long myId;
 
   @PostMapping("/login")
   public RedirectView loginApi(LoginDto dto){
-    long userId = loginService.login(dto);
+    myId = loginService.login(dto);
+    long userId = myId;
     if(userId != 0) {
-      return new RedirectView("/main?id=" + userId);
+      return new RedirectView("/main?id=" + userId + "&page=1");
     }
     else {
 //      redirectAttributes.addAttribute("message", "아이디 혹은 비밀번호가 틀립니다.");
@@ -44,11 +56,7 @@ public class IndexController {
 
   @GetMapping("/main")
   public String index(Model model, long id) {
-//    user 객체 넘겨줘야 함
-
-    List<Post> postList = postService.getAllPost(id);
-    // 로그인을 누르면 Id 값을 넘겨줘야 함 (userId)
-//    Comment를 Post 객체에 넣어줌
+    List<Post> postList = postService.getFindByPagePost(id, 1, 3);
 
     List<List<Comment>> commentList = new ArrayList<>();
     for(int i = 0; i < postList.size(); i++){
@@ -56,8 +64,6 @@ public class IndexController {
       List<Comment> comments = commentService.getPostComment(postId);
       while(!comments.isEmpty()){
         commentList.add(comments);
-        System.out.println(comments.get(0).getContent());
-        System.out.println(comments.get(1).getContent());
         break;
       }
     }
@@ -68,8 +74,12 @@ public class IndexController {
 
   @GetMapping("/profile")
   public String profile(Model model, long id) {
-    List<Post> myPostList = postService.getFindByAuthor(id);
-    model.addAttribute("myPostList", myPostList);
+    long userId = myId;
+    List<Post> postList = postService.getFindByAuthor(id);
+    User user = userService.findById(id);
+    model.addAttribute("user", user);
+    model.addAttribute("postList", postList);
+    model.addAttribute("myId", myId);
     return "profile";
   }
 }

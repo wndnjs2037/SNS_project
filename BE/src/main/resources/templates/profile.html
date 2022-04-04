@@ -24,7 +24,9 @@
    </head>
    <body class="bg-light">
       <div class="web-none d-flex align-items-center px-3 pt-3">
-         <a id="moveIndex" class="text-decoration-none">
+         <input type="hidden" id="profileId" th:value="${user.id}">
+         <input type="hidden" id="userId" th:value="${myId}">
+         <a name="moveIndex" class="text-decoration-none">
          <img src="img/logo.png" class="img-fluid logo-mobile" alt="brand-logo">
          </a>
          <button class="ms-auto btn btn-primary ln-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -39,7 +41,7 @@
                   <div class="main-content">
                      <div class="mb-4 d-flex align-items-center">
                         <div class="d-flex align-items-center">
-                           <a id="moveIndex" class="material-icons text-dark text-decoration-none m-none me-3">arrow_back</a>
+                           <a name="moveIndex" class="material-icons text-dark text-decoration-none m-none me-3">arrow_back</a>
                            <p class="ms-2 mb-0 fw-bold text-body fs-6">Shay Jordon</p>
                         </div>
                         <a href="#" class="text-decoration-none material-icons md-20 ms-auto text-muted">share</a>
@@ -102,7 +104,7 @@
                            <!-- Follow People -->
                            <div class="ms-1">
                               <!-- Feeds -->
-                              <div class="feeds" th:each="myPost :${myPostList}" th:if="${myPost.isVisible}">
+                              <div class="feeds" th:each="post :${postList}" th:if="${post.isVisible}">
                                  <!-- Feed Item -->
                                  <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
                                     <div class="d-flex">
@@ -116,7 +118,7 @@
                                                    <small class="text-muted ms-2">@shay-jordon</small>
                                                 </a>
                                                 <div class="d-flex align-items-center small">
-                                                   <p class="text-muted mb-0" th:text = "${myPost.createdAt}">19 Feb</p>
+                                                   <p class="text-muted mb-0" th:text = "${post.createdAt}">19 Feb</p>
                                                    <div class="dropdown">
                                                       <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
                                                       <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
@@ -129,19 +131,19 @@
                                                 </div>
                                              </div>
                                              <div class="my-2">
-                                                <p class="text-dark" th:text="${myPost.content}">Happy Vogel to you!</p>
+                                                <p class="text-dark" th:text="${post.content}">Happy Vogel to you!</p>
                                                 <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
                                                 <img src="img/post1.png" class="img-fluid rounded mb-3" alt="post-img">
                                                 </a>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                    <div>
-                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span th:text="${myPost.countLiked}">30.4k</span></a>
+                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span th:text="${post.countLiked}">30.4k</span></a>
                                                    </div>
                                                    <div>
-                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span th:text="${myPost.countComment}">4.0k</span></a>
+                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span th:text="${post.countComment}">4.0k</span></a>
                                                    </div>
                                                    <div>
-                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span  th:text="${myPost.countRevogel}">617</span></a>
+                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span  th:text="${post.countRevogel}">617</span></a>
                                                    </div>
                                                    <div>
                                                       <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
@@ -826,13 +828,13 @@
                   <div class="p-2 bg-light offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
                      <div class="sidebar-nav mb-3">
                         <div class="pb-4">
-                           <a id="moveIndex" class="text-decoration-none">
+                           <a name="moveIndex" class="text-decoration-none">
                            <img src="img/logo.png" class="img-fluid logo" alt="brand-logo">
                            </a>
                         </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1">
                            <li class="nav-item">
-                              <a id="moveIndex" class="nav-link"><span class="material-icons me-3">house</span> <span>Feed</span></a>
+                              <a name="moveIndex" class="nav-link"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="profile.html" class="nav-link active"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
@@ -844,7 +846,7 @@
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
                            </li>
                            <li class="nav-item">
-                              <a id="moveIndex" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                              <a name="moveIndex" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
                            </li>
                            <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -868,13 +870,13 @@
                   <div class="ps-0 m-none fix-sidebar">
                      <div class="sidebar-nav mb-3">
                         <div class="pb-4 mb-4">
-                           <a id="moveIndex" class="text-decoration-none">
+                           <a name="moveIndex" class="text-decoration-none">
                            <img src="img/logo.png" class="img-fluid logo" alt="brand-logo">
                            </a>
                         </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1">
                            <li class="nav-item">
-                              <a id="moveIndex" class="nav-link"><span class="material-icons me-3">house</span> <span>Feed</span></a>
+                              <a name="moveIndex" class="nav-link"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="profile.html" class="nav-link active"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
@@ -886,7 +888,7 @@
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
                            </li>
                            <li class="nav-item">
-                              <a id="moveIndex" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                              <a name="moveIndex" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
                            </li>
                            <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

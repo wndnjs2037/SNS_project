@@ -18,4 +18,9 @@ public class User {
   private String profile;
   private Long followingCount;
   private Long followerCount;
+
+  public User(String email, String name) {
+    this.email = email;
+    this.name = name;
+  }
 }

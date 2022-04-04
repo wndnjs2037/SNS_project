@@ -15,6 +15,7 @@ public class PostService {
     private FriendTagRepository friendTagRepository;
     private LikeRepository likeRepository;
     private TagPostRepository tagPostRepository;
+    private CommentRepository commentRepository;
 
     public boolean savePost(Post post, HashTag hashTag){
         Integer result = postRepository.save(post, hashTag);
@@ -55,7 +56,7 @@ public class PostService {
         return result == 1;
     }
 
-    public List<Post> getOnePost(Long id){
+    public Post getOnePost(Long id){
         return postRepository.findOnePost(id);
     }
 
@@ -71,5 +72,9 @@ public class PostService {
 
     public List<Post> getFindByAuthor(Long author){
         return postRepository.findByAuthor(author);
+    }
+
+    public List<Post> getFindByPagePost(Long userId, Integer page, Integer size) {
+        return postRepository.findByPagePost(userId, size, (page-1) * size);
     }
 }

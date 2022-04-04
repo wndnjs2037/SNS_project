@@ -3,8 +3,10 @@ package com.codepresso.team2app.controller;
 import com.codepresso.team2app.controller.dto.HashTagRequestDto;
 import com.codepresso.team2app.controller.dto.PostRequestDto;
 import com.codepresso.team2app.controller.dto.PostResponseDto;
+import com.codepresso.team2app.service.CommentService;
 import com.codepresso.team2app.service.PostService;
 import com.codepresso.team2app.vo.*;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -70,6 +72,7 @@ public class PostController {
     @GetMapping("/post/all")
     public List<PostResponseDto> getAllPostList(@RequestParam("id") Long id) {
         List<Post> postList = postService.getAllPost(id);
+        System.out.println(postList.get(0).getUser().getId());
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         for(Post post : postList){
             postResponseDtos.add(new PostResponseDto(post));
@@ -79,23 +82,19 @@ public class PostController {
     }
 
     @GetMapping("/post")
-    public List<Post> getOnePost(@RequestParam(name = "id")Long id) {
-        List<Post> list = postService.getOnePost(id);
-        return list;
+    public Post getOnePost(@RequestParam(name = "id")Long id) {
+        Post post = postService.getOnePost(id);
+        return post;
     }
 
     @PutMapping("/post/like")
     public String updateLikeCount(@RequestParam("id") Long id) {
-        List<Post> list = postService.getOnePost(id);
-
-        Post post = list.get(0);
-        post.postInfo();
+        Post post = postService.getOnePost(id);
 
         long like_id = 1;
         Like like;
         like = new Like(like_id, post.getId(), post.getAuthor());
         postService.countSave(like);
-
         postService.updateLike(post);
         return "Success";
     }
@@ -117,5 +116,16 @@ public class PostController {
     public List<Post> getFindByAuthor(@RequestParam("author") Long author) {
         List<Post> postList = postService.getFindByAuthor(author);
         return postList;
+    }
+
+    @GetMapping("/post/page")
+    public List<PostResponseDto> getPostList(@RequestParam("id") Long userId, @RequestParam(name = "page") Integer page) {
+        List<Post> postList = postService.getFindByPagePost(userId, page, 3);
+
+        List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        for (Post post : postList) {
+            postResponseDtos.add(new PostResponseDto(post));
+        }
+        return postResponseDtos;
     }
 }

@@ -15,6 +15,7 @@ public class CommentResponseDto {
     Date createdAt;
     Long countLiked;
     Boolean isVisible;
+    String name;
 
     public CommentResponseDto(Comment comment) {
         this.id = comment.getId();
@@ -24,5 +25,8 @@ public class CommentResponseDto {
         this.createdAt = comment.getCreatedAt();
         this.countLiked = comment.getCountLiked();
         this.isVisible = comment.getIsVisible();
+        this.name = comment.getUser().getName();
     }
+
+
 }

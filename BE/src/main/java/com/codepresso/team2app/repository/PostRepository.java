@@ -14,9 +14,10 @@ public interface PostRepository {
     Integer savePost(@Param("post") Post post);
     List<Post> findAllPost(@Param("id") long id);
     Integer updateLike(Post post);
-    List<Post> findOnePost(@Param("id") long id);
+    Post findOnePost(@Param("id") long id);
     Integer updateContent(@Param("post") Post post);
     Integer noVisiblePost(@Param("id") long id);
     Integer updateCountComment(@Param("id") long id);
     List<Post> findByAuthor(@Param("author") long author);
+    List<Post> findByPagePost(@Param("id") long userId, @Param("limit") Integer limit, @Param("offset") Integer offset);
 }

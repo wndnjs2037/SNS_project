@@ -72,20 +72,31 @@ Version: 1.0
 
 })(jQuery); // End of use strict
 
-//로그인 클릭시 user_id에 맞게 조회해줌
-// $("#로그인 id").click(function (){
-// 	console.log("로그인 완료");
-// 	var id = $("#user_id").val();
-//
-// 	$.ajax({
-// 		method: "GET",
-// 		url : "/main?id=" + id,
-// 		contentType: "application/json"
-// 	})
-// 		.done(function (response){
-// 			window.location.reload();
-// 		})
-// })
+let isRequestPost = false;
+window.addEventListener('scroll',() => {
+	// $("#mainPost").height() : DOM의 길이
+	// $("#mainPost").offset().top : DOM의 최상단 위치
+	//window.pageYOffset : 현제 스크롤 최상단 위치
+	//window.innerHeight : 창 길이
+	const domPositionY = $("#mainPost").height() + $("#mainPost").offset().top;
+	const windowPositionY = window.pageYOffset + window.innerHeight;
+
+	var next_page = parseInt($("#mainPost").attr("current-page")) + 1;
+	var userId = $("#user_id").val();
+
+	// if (domPositionY <= windowPositionY && !this.isRequestPost) {
+	// 	this.isRequestPost = true;
+	// 	// setTimeout(() => this.isRequestPost = false, 1000);
+	//
+	// 	$.ajax({
+	// 		method: "GET",
+	// 		url :"/post/page?id=" + userId + "&page=" + next_page
+	// 	})
+	// 		.done(function (response) {
+	// 			window.location.reload();
+	// 		});
+	// }
+});
 
 $("#create_post").click(function (){
 	console.log("create click");
@@ -107,57 +118,104 @@ $("#create_post").click(function (){
 		});
 });
 
-$("#follow").click(function () {
-	console.log("follow click");
-});
-
-$("a[name='updatePost']").click(function (){
-	console.log("update click");
-
-// 	var content = $("#updateText").val();
-// 	var id = parseInt($(this).attr("id"));
-// 	var postId = document.getElementsByName("postId")[id].value;
-//
-//
-// //수정 필요 updateModal 내부에  th:attrappend="id=${postStat.index}"가 필요한가?
-// 	$.ajax({
-// 		method: "PUT",
-// 		url :"/post",
-// 		data: JSON.stringify({
-// 			"content" :content,
-// 			"id" : postId
-// 		}),
-// 		contentType:"application/json"
-// 	})
-// 		.done(function (response) {
-// 			console.log(id);
-// 			window.location.reload();
-// 		});
-});
-
-$("a[name='deletePost']").click(function (){
-
+$("input[name='saveComment']").keydown(function (key){
 	var userId = $("#user_id").val();
-	var id = parseInt($(this).attr("id"));
+	var postId = parseInt($(this).attr("postId"));
+	var content = $("input[name='saveComment']").val();
 
-	var deletePostCnt = parseInt($("div[id='feed']").attr("deletePostCnt"));
-	console.log("delete deletePostCnt : ", deletePostCnt);
-	var postId = document.getElementsByName("postId")[id].value;
+	if(key.keyCode == 13){
+		$.ajax({
+			method: "POST",
+			url :"/comment",
+			data: JSON.stringify({
+				"author" :userId,
+				"content": content,
+				"postId" : postId
+			}),
+			contentType:"application/json"
+		})
+			.done(function (response) {
+				console.log("comment creation success!");
+				window.location.reload();
+			});
+	}
+})
 
-	console.log("delete click : ", postId);
+// $("input[name='follow']").click(function () {
+// 	console.log("follow click");
+// 	var userId = $("#user_id").val();
+// 	var otherId = 3;
+// 	var isFollow = parseInt($(this).attr("isFollow"));
+//
+// 	if (isFollow == 1) {
+// 		$.ajax({
+// 			method: "POST",
+// 			url :"/follow",
+// 			data: JSON.stringify({
+// 				"otherId" :otherId,
+// 				"userId": userId
+// 			//	임시
+// 			}),
+// 			contentType:"application/json"
+// 		})
+// 			.done(function (response) {
+// 				window.location.reload();
+// 			});
+// 		$("input[class='btn-check']").attr("isFollow", 0);
+// 	}
+// 	else {
+// 		$.ajax({
+// 			method: "DELETE",
+// 			url :"/follow?otherId=" + otherId + "&userId=" + userId,
+// 			contentType:"application/json"
+// 		})
+// 			.done(function (response) {
+// 				window.location.reload();
+// 			});
+// 		$("input[class='btn-check']").attr("isFollow", "1");
+// 	}
+// });
+
+// Edit 눌렀을 때
+$("a[name='updatePostModal']").click(function (){
+	var id = parseInt($(this).attr("postId"));
+	console.log(id);
+	$("a[name='updatePost']").attr("value", id);
+	$("div[class='modal-body p-0 mb-3']").attr("updatePostId", id);
+});
+
+//Update Modal에서 post 눌렀을 때
+$("a[name='updatePost']").click(function (){
+
+	var content = $("#updateText").val();
+	var id = parseInt($(this).attr("value"));
+	console.log(id);
 
 	$.ajax({
 		method:"PUT",
-		url:"/post/delete?id=" + postId,
+		url:"/post",
+		data: JSON.stringify({
+			"content" :content,
+			"id": id
+		}),
 		contentType:"application/json"
 	}).done(function (response){
 		window.location.reload();
 	});
+});
 
-	var deletePostCnt = parseInt($("div[id='feed']").attr("deletePostCnt"));
-	var cnt = deletePostCnt + 1;
-	$("div[id='feed']").attr("deletePostCnt", cnt);
-	//새로고침 후 값 증가시키는 방법
+$("a[name='deletePost']").click(function (){
+	var userId = $("#user_id").val();
+	var id = parseInt($(this).attr("postId"));
+	console.log(id);
+
+	$.ajax({
+		method:"PUT",
+		url:"/post/delete?id=" + id,
+		contentType:"application/json"
+	}).done(function (response){
+		window.location.reload();
+	});
 });
 
 $("a[name='moveProfile']").click(function (){
@@ -177,7 +235,7 @@ $("a[name='moveMyProfile']").click(function (){
 
 $("a[name='moveIndex']").click(function (){
 	console.log("cliked")
-	var id = $("#user_id").val();
+	var id = $("#userId").val();
 	console.log(id);
 	window.location.href = "/main?id=" + id;
 });

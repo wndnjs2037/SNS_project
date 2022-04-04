@@ -13,15 +13,24 @@
         values (#{post.content}, #{post.author});
     </insert>
 
-<!--    <select id="findAllPost" resultType="com.codepresso.team2app.vo.Post">-->
-<!--        SELECT * FROM POST;-->
-<!--    </select>-->
-
     <select id="findAllPost" resultType="com.codepresso.team2app.vo.Post">
-        select post.*
+        select post.*, users.email, users.name
         from post join follow
-        on post.author = follow.other_id and follow.user_id = #{id};
+        on post.author = follow.other_id and follow.user_id = #{id}
+        join users
+        on post.author = users.id;
     </select>
+
+    <select id="findByPagePost" resultType="com.codepresso.team2app.vo.Post">
+        select post.*, users.email, users.name
+        from post join follow
+        on post.author = follow.other_id and follow.user_id = #{id}
+        join users
+        on post.author = users.id
+        order by id desc
+        limit #{limit} offset #{offset};
+    </select>
+
 
     <select id="findOnePost" resultType="com.codepresso.team2app.vo.Post">
         SELECT * FROM POST

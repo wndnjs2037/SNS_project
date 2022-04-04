@@ -1,6 +1,7 @@
 package com.codepresso.team2app.controller;
 
 import com.codepresso.team2app.controller.dto.CommentRequestDto;
+import com.codepresso.team2app.controller.dto.CommentResponseDto;
 import com.codepresso.team2app.service.CommentService;
 import com.codepresso.team2app.vo.Comment;
 import com.codepresso.team2app.vo.HashTag;
@@ -54,8 +55,13 @@ public class CommentController {
     }
 
     @GetMapping("/comment/post")
-    public List<Comment> getPostComment(@RequestParam("id") Long id) {
+    public List<CommentResponseDto> getPostComment(@RequestParam("id") Long id) {
         List<Comment> commentList = commentService.getPostComment(id);
-        return commentList;
+        System.out.println(commentList.get(0).getUser().getId());
+        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
+        for (Comment comment : commentList) {
+            commentResponseDtos.add(new CommentResponseDto(comment));
+        }
+        return commentResponseDtos;
     }
 }
