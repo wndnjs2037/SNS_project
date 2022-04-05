@@ -25,7 +25,7 @@
 <body class="bg-light">
 
 <!--user의 id를 명시-->
-<input type="hidden" id="user_id" value = 1>
+<input type="hidden" id="user_id" th:value="${userId}">
 <div class="web-none d-flex align-items-center px-3 pt-3">
    <a href="main.html" class="text-decoration-none">
       <img src="img/logo.png" class="img-fluid logo-mobile" alt="brand-logo">
@@ -275,12 +275,10 @@
                                           </div>
                                           <div class="comments" th:each="comment : ${commentList}">
 
-                                             <div class="d-flex mb-2" th:each="comment1 : ${comment}" th:if = "${comment1.postId == post.id}">
-                                                <!--                                                <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">-->
+                                             <div class="d-flex mb-2" th:each="comment1 : ${comment}" th:if = "${comment1.postId == post.id} and ${comment1.isVisible}">
                                                 <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
                                                 </a>
                                                 <div class="ms-2 small">
-                                                   <!--                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">-->
                                                    <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
                                                       <!--                                                         댓글 작성자 이름-->
                                                       <p class="fw-500 mb-0" >Macie Bellis</p>
@@ -295,8 +293,15 @@
                                                       <span class="small text-muted" th:text="${comment1.createdAt}">1h</span>
                                                    </div>
                                                 </div>
+                                                <label th:if="${comment1.author} == ${userId}" type="button" style="text-align: right; width: 250px;" name="deleteComment" th:attrappend="commentId=${comment1.id}"> Delete
+                                                </label>
+                                             </div>
+                                             <div>
+                                                <!--                                             if문으로 댓글 갯수 확인 후 더보기 여부 결정-->
+                                                <label type="button" class="more-comment" style="width: 100%;text-align: center;"> 더 보 기 </label>
                                              </div>
                                           </div>
+
                                        </div>
                                     </div>
                                  </div>

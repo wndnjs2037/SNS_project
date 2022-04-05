@@ -61,12 +61,13 @@ public class IndexController {
     List<List<Comment>> commentList = new ArrayList<>();
     for(int i = 0; i < postList.size(); i++){
       long postId = postList.get(i).getId();
-      List<Comment> comments = commentService.getPostComment(postId);
+      List<Comment> comments = commentService.getFindPostCommentByPage(postId, 0, 3);
       while(!comments.isEmpty()){
         commentList.add(comments);
         break;
       }
     }
+    model.addAttribute("userId", myId);
     model.addAttribute("postList", postList);
     model.addAttribute("commentList", commentList);
     return "main";

@@ -72,6 +72,7 @@ Version: 1.0
 
 })(jQuery); // End of use strict
 
+
 let isRequestPost = false;
 window.addEventListener('scroll',() => {
 	// $("#mainPost").height() : DOM의 길이
@@ -83,6 +84,7 @@ window.addEventListener('scroll',() => {
 
 	var next_page = parseInt($("#mainPost").attr("current-page")) + 1;
 	var userId = $("#user_id").val();
+
 
 	// if (domPositionY <= windowPositionY && !this.isRequestPost) {
 	// 	this.isRequestPost = true;
@@ -217,6 +219,19 @@ $("a[name='deletePost']").click(function (){
 		window.location.reload();
 	});
 });
+
+$("label[name='deleteComment']").click(function (){
+	var commentId = parseInt($(this).attr("commentId"));
+	console.log(commentId);
+
+	$.ajax({
+		method:"PUT",
+		url:"/comment/delete?commentId=" + commentId,
+		contentType:"application/json"
+	}).done(function (response){
+		window.location.reload();
+	});
+})
 
 $("a[name='moveProfile']").click(function (){
 	console.log("move profile");

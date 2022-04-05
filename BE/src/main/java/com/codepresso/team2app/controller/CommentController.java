@@ -64,4 +64,20 @@ public class CommentController {
         }
         return commentResponseDtos;
     }
+
+    @GetMapping("/comment/page")
+    public List<CommentResponseDto> getPostCommentByPage(@RequestParam(name="postId") Long postId, @RequestParam(name = "page") Integer page) {
+        List<Comment> commentList = commentService.getFindPostCommentByPage(postId, page, 3);
+        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
+        for (Comment comment : commentList) {
+            commentResponseDtos.add(new CommentResponseDto(comment));
+        }
+        return commentResponseDtos;
+    }
+
+    @PutMapping("comment/delete")
+    public String updateNoVisibleComment(@RequestParam("commentId") Long commentId) {
+        commentService.noVisibleComment(commentId);
+        return "Success";
+    }
 }

@@ -12,4 +12,6 @@ public interface CommentRepository {
     List<Comment> findAllComment();
     Comment findOneComment(@Param("id") Long id);
     List<Comment> findPostComment(@Param("id") Long id);
+    List<Comment> findPostCommentByPage(@Param("postId") Long postId, @Param("limit") Integer limit, @Param("offset") Integer offset);
+    Integer noVisibleComment(@Param("commentId") Long commentId);
 }

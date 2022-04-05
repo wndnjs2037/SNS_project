@@ -42,4 +42,14 @@ public class CommentService {
         List<Comment> commentList = commentRepository.findPostComment(id);
         return commentList;
     }
+
+    public List<Comment> getFindPostCommentByPage(Long postId, Integer page, Integer size) {
+        List<Comment> comments = commentRepository.findPostCommentByPage(postId, size, (page-1) * size);
+        return comments;
+    }
+
+    public boolean noVisibleComment(Long commentId){
+        Integer result = commentRepository.noVisibleComment(commentId);
+        return result == 1;
+    }
 }

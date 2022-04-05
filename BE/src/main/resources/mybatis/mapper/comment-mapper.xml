@@ -20,9 +20,24 @@
     <select id="findPostComment" resultType="com.codepresso.team2app.vo.Comment">
         select comment.*, users.email, users.name
         from comment join post
-        on post.id = comment.post_id and comment.post_id = #{id}
+        on comment.post_id = post.id and comment.post_id = #{id}
         join users
         on comment.author = users.id;
     </select>
+
+    <select id="findPostCommentByPage" resultType="com.codepresso.team2app.vo.Comment">
+        select comment.*, users.email, users.name
+        from comment join post
+        on comment.post_id = post.id and post.id = #{postId}
+        join users
+        on comment.author = users.id
+        order by id desc
+        limit #{limit} offset #{offset};
+    </select>
+
+    <update id="noVisibleComment">
+        update comment set is_visible = false
+        where id = #{commentId};
+    </update>
 
 </mapper>

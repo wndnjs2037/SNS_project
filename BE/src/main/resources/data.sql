@@ -41,6 +41,14 @@ insert into comment(author, content, post_id)
 values (1, 'hello~', 2);
 insert into comment(author, content, post_id)
 values (2, 'hi!!', 2);
+insert into comment(author, content, post_id)
+values (1, 'hello~', 7);
+insert into comment(author, content, post_id)
+values (2, 'hello~', 7);
+insert into comment(author, content, post_id)
+values (3, 'hello~', 7);
+insert into comment(author, content, post_id)
+values (1, 'hello~', 7);
 
 insert into follow(user_id, other_id)
 values (1,2);

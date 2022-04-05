@@ -119,7 +119,7 @@ public class PostController {
     }
 
     @GetMapping("/post/page")
-    public List<PostResponseDto> getPostList(@RequestParam("id") Long userId, @RequestParam(name = "page") Integer page) {
+    public List<PostResponseDto> getPostList(@RequestParam("postId") Long userId, @RequestParam(name = "page") Integer page) {
         List<Post> postList = postService.getFindByPagePost(userId, page, 3);
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
