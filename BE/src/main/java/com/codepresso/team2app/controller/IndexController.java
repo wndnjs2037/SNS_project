@@ -1,6 +1,7 @@
 package com.codepresso.team2app.controller;
 
 import com.codepresso.team2app.controller.dto.LoginDto;
+import com.codepresso.team2app.controller.dto.ProfileRequestDto;
 import com.codepresso.team2app.domain.User;
 import com.codepresso.team2app.service.CommentService;
 import com.codepresso.team2app.service.LoginService;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -81,6 +85,12 @@ public class IndexController {
     model.addAttribute("user", user);
     model.addAttribute("postList", postList);
     model.addAttribute("myId", myId);
+    return "profile";
+  }
+
+  @PatchMapping("/profile/{id}")
+  public String updateProfile(long id, ProfileRequestDto dto){
+    userService.updateProfile(id, dto);
     return "profile";
   }
 }

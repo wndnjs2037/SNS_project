@@ -11,4 +11,5 @@ public interface UserRepository {
   User findById(@Param("id") long id);
   void updateFollower(@Param("id") long id);
   void updateFollowing(@Param("id") long id);
+  void updateProfile(@Param("id") long id, String content);
 }

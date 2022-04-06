@@ -1,5 +1,6 @@
 package com.codepresso.team2app.service;
 
+import com.codepresso.team2app.controller.dto.ProfileRequestDto;
 import com.codepresso.team2app.domain.User;
 import com.codepresso.team2app.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -20,5 +21,9 @@ public class UserService {
 
     public void updateFollowing(Long id) {
         userRepository.updateFollowing(id);
+    }
+
+    public void updateProfile(long id, ProfileRequestDto dto){
+        userRepository.updateProfile(id, dto.getContent());
     }
 }
