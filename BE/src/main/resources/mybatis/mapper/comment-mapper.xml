@@ -18,7 +18,7 @@
     </select>
 
     <select id="findPostComment" resultType="com.codepresso.team2app.vo.Comment">
-        select comment.*, users.email, users.name
+        select comment.*, users.email as email, users.name as name
         from comment join post
         on comment.post_id = post.id and comment.post_id = #{id}
         join users

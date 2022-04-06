@@ -1,6 +1,5 @@
 package com.codepresso.team2app.vo;
 
-import com.codepresso.team2app.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,8 @@ public class Comment {
     Long countLiked;
     Boolean isVisible;
     Long idx;
-    User user;
+    String email;
+    String name;
 
     public Comment() {
     }
@@ -49,6 +49,7 @@ public class Comment {
         this.createdAt = createdAt;
         this.countLiked = countLiked;
         this.isVisible = isVisible;
-        this.user = new User(email, name);
+        this.email = email;
+        this.name = name;
     }
 }

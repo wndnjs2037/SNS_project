@@ -57,7 +57,6 @@ public class CommentController {
     @GetMapping("/comment/post")
     public List<CommentResponseDto> getPostComment(@RequestParam("id") Long id) {
         List<Comment> commentList = commentService.getPostComment(id);
-        System.out.println(commentList.get(0).getUser().getId());
         List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
         for (Comment comment : commentList) {
             commentResponseDtos.add(new CommentResponseDto(comment));

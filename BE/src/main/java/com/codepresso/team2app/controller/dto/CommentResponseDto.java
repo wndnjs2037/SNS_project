@@ -25,7 +25,7 @@ public class CommentResponseDto {
         this.createdAt = comment.getCreatedAt();
         this.countLiked = comment.getCountLiked();
         this.isVisible = comment.getIsVisible();
-        this.name = comment.getUser().getName();
+        this.name = comment.getName();
     }
 
 
