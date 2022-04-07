@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    group:
+      local: local-db
+  mvc:
+    view:
+      suffix: .html
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:sns
+    username: codepresso
+    password: 1234
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+mybatis:
+  configuration:
+    multiple-result-sets-enabled: false
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    jdbc-type-for-null: varchar
+    default-fetch-size: 500
+  mapper-locations:
+    - classpath:mybatis/mapper/*.xml

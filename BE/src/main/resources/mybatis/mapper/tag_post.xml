@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.team2app.repository.TagPostRepository">
+    <insert id="saveTagPost">
+        insert into tag_post(post_id, hashtag_id)
+        values(#{tagPost.postId}, #{tagPost.hashTagId})
+    </insert>
+</mapper>
