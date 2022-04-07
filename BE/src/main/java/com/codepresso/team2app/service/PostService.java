@@ -17,6 +17,7 @@ public class PostService {
     private TagPostRepository tagPostRepository;
     private CommentRepository commentRepository;
 
+
     public boolean savePost(Post post, HashTag hashTag){
         Integer result = postRepository.save(post, hashTag);
         hashTagRepositroy.saveHashTag(hashTag);
@@ -46,17 +47,26 @@ public class PostService {
         return postRepository.findAllPost(id);
     }
 
+    public List<Post> getAllPost() {
+        return postRepository.findAllPost();
+    }
+
     public boolean countSave(Like like) { //insert 쿼리
         Integer result = likeRepository.countSave(like);
         return result == 1; //True 반환
     }
 
-    public boolean updateLike(Post post){
-        Integer result = postRepository.updateLike(post);
-        return result == 1;
-    }
+//    public boolean updateLike(Post post){
+//        Integer result = postRepository.updateLike(post);
+//        return result == 1;
+//    }
 
-    public Post getOnePost(Long id){
+
+//    public Post getOnePost(Long id){
+//        return postRepository.findOnePost(id);
+//    }
+
+    public List<Post> getOnePost(Long id){
         return postRepository.findOnePost(id);
     }
 

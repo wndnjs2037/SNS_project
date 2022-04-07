@@ -3,9 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.codepresso.team2app.repository.LikeRepository">
-    <insert id="countSave">
+    <insert id="countSave">  <!-- 좋아요 개수 저장 -->
         insert into likes(user_id, article_id)
         values(#{Like.user_id}, #{Like.article_id});
     </insert>
+    <delete id="delete">
+        delete from likes where article_id = #{Like.article_id} and user_id = #{Like.user_id}
+    </delete>
+
+    <select id="selectOne" resultType="com.codepresso.team2app.vo.Like">
+        select * from likes where article_id = #{Like.article_id} and user_id = #{Like.user_id}
+    </select>
+
+    <select id="countByArticleId" resultType="long">
+        select count(*) from likes where article_id = #{articleId}
+    </select>
 
 </mapper>

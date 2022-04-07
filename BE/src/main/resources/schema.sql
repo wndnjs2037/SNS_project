@@ -69,6 +69,7 @@ CREATE TABLE likes(
     id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     user_id BIGINT NOT NULL,
     article_id BIGINT NOT NULL,
+    UNIQUE KEY ukey_user_id_article_id (user_id, article_id),
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY(article_id) REFERENCES post(id) ON DELETE CASCADE
 );
@@ -132,4 +133,14 @@ CREATE TABLE images
     PRIMARY KEY(id),
     FOREIGN KEY(post_id) REFERENCES post(id),
     FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE revogel
+(
+  id BIGINT NOT NULL AUTO_INCREMENT, -- revogel 기본 id
+  revogel_post_id BIGINT, -- revogel된 post의 id
+  user_id BIGINT NOT NULL, -- revogel한 user의 id
+  PRIMARY KEY(id),
+  FOREIGN KEY(revogel_post_id) REFERENCES post(id),
+  FOREIGN KEY(user_id) REFERENCES users(id)
 );

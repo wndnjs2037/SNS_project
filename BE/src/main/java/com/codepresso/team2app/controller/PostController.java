@@ -81,23 +81,41 @@ public class PostController {
         return postResponseDtos;
     }
 
+//    @GetMapping("/post/all")
+////    public List<PostResponseDto> getAllPostList() {
+////        List<Post> postList = postService.getAllPost();
+////        List<PostResponseDto> postResponseDtos = new ArrayList<>();
+////        for(Post post : postList){
+////            postResponseDtos.add(new PostResponseDto(post));
+////        }
+////
+////        return postResponseDtos;
+////    }
+
+//    @GetMapping("/post")
+//    public Post getOnePost(@RequestParam(name = "id")Long id) {
+//        Post post = postService.getOnePost(id);
+//        return post;
+//    }
+
     @GetMapping("/post")
-    public Post getOnePost(@RequestParam(name = "id")Long id) {
-        Post post = postService.getOnePost(id);
-        return post;
+    public List<Post> getOnePost(@RequestParam(name = "id")Long id) {
+        List<Post> list = postService.getOnePost(id);
+        return list;
     }
 
-    @PutMapping("/post/like")
-    public String updateLikeCount(@RequestParam("id") Long id) {
-        Post post = postService.getOnePost(id);
 
-        long like_id = 1;
-        Like like;
-        like = new Like(like_id, post.getId(), post.getAuthor());
-        postService.countSave(like);
-        postService.updateLike(post);
-        return "Success";
-    }
+//    @PutMapping("/post/like")
+//    public String updateLikeCount(@RequestParam("id") Long id) {
+//        Post post = postService.getOnePost(id);
+//
+//        long like_id = 1;
+//        Like like;
+//        like = new Like(like_id, post.getId(), post.getAuthor());
+//        postService.countSave(like);
+//        postService.updateLike(post);
+//        return "Success";
+//    }
 
     @PutMapping("post")
     public String updatePostContent(@RequestBody PostRequestDto postRequestDto) {

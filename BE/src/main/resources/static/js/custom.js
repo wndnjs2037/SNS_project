@@ -302,3 +302,31 @@ $(".more-commentmore-comment").click(function (){
 		}
 	})
 })
+
+$("a[name='liked']").click(function (){
+
+	var id = parseInt($(this).attr("id"));
+	var postId = document.getElementsByName("postId")[id].value;
+	var userId = $("#user_id").val();
+    var countLiked = $("#countLiked").val();
+
+    console.log("like click");
+    console.log("id: " + id);
+	console.log("userid: " + userId);
+	console.log("postId: " + postId);
+	console.log("count_liked: " + countLiked); //count_liked 개수를 가져와서 프론트 연결하는 방법?
+
+	$.ajax({
+		method :"POST",
+		url : "/like",
+		data: JSON.stringify({
+        			"articleId" :postId,
+        			"userId": userId
+        		}),
+		contentType:"application/json"
+	})
+		.done(function (response){
+			window.location.reload();
+			console.log("success");
+		})
+});
