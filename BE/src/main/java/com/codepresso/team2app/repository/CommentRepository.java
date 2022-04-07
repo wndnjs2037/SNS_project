@@ -13,5 +13,6 @@ public interface CommentRepository {
     Comment findOneComment(@Param("id") Long id);
     List<Comment> findPostComment(@Param("id") Long id);
     List<Comment> findPostCommentByPage(@Param("postId") Long postId, @Param("limit") Integer limit, @Param("offset") Integer offset);
+//    page, Limit 갯수에 맞게 조회가 안됨..
     Integer noVisibleComment(@Param("commentId") Long commentId);
 }

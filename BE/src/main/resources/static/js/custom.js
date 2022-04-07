@@ -130,7 +130,7 @@ $("input[name='saveComment']").keydown(function (key){
 			method: "POST",
 			url :"/comment",
 			data: JSON.stringify({
-				"author" :userId,
+				"author" : userId,
 				"content": content,
 				"postId" : postId
 			}),
@@ -206,6 +206,10 @@ $("a[name='updatePost']").click(function (){
 	});
 });
 
+$("label[id='updateProfile']").click(function (){
+
+})
+
 $("a[name='deletePost']").click(function (){
 	var userId = $("#user_id").val();
 	var id = parseInt($(this).attr("postId"));
@@ -239,13 +243,25 @@ $("a[name='moveProfile']").click(function (){
 	var author = document.getElementsByName("postAuthor")[id].value;
 	console.log(author);
 
-	window.location.href = "/profile?id=" + author;
+	$.ajax({
+		method:"GET",
+		url:"/user?id=" + author,
+		contentType:"application/json"
+	}).done(function (response){
+		window.location.href = "/profile?id=" + author;
+	});
 });
 
 $("a[name='moveMyProfile']").click(function (){
 	var id = $("#user_id").val();
 
-	window.location.href = "/profile?id=" + id;
+	$.ajax({
+		method:"GET",
+		url:"/user?id=" + id,
+		contentType:"application/json"
+	}).done(function (response){
+		window.location.href = "/profile?id=" + id;
+	});
 });
 
 $("a[name='moveIndex']").click(function (){
@@ -272,3 +288,17 @@ $("a[name='liked']").click(function (){
 			window.location.reload();
 		})
 });
+
+$(".more-commentmore-comment").click(function (){
+	var next_comment = parseInt($(this).attr("current-comment-page")) + 1;
+	var post_id = parseInt($(this).attr("postId"));
+
+	$.ajax({
+		method: "GET",
+		url: "/comment",
+		data: {
+			"id": post_id,
+			"page": next_comment
+		}
+	})
+})

@@ -25,7 +25,7 @@
    <body class="bg-light">
       <div class="web-none d-flex align-items-center px-3 pt-3">
          <input type="hidden" id="profileId" th:value="${user.id}">
-         <input type="hidden" id="userId" th:value="${myId}">
+         <input type="hidden" id="user_id" th:value="${myId}">
          <a name="moveIndex" class="text-decoration-none">
          <img src="img/logo.png" class="img-fluid logo-mobile" alt="brand-logo">
          </a>
@@ -42,7 +42,7 @@
                      <div class="mb-4 d-flex align-items-center">
                         <div class="d-flex align-items-center">
                            <a name="moveIndex" class="material-icons text-dark text-decoration-none m-none me-3">arrow_back</a>
-                           <p class="ms-2 mb-0 fw-bold text-body fs-6">Shay Jordon</p>
+                           <p class="ms-2 mb-0 fw-bold text-body fs-6" th:text="${user.name}">Shay Jordon</p>
                         </div>
                         <a href="#" class="text-decoration-none material-icons md-20 ms-auto text-muted">share</a>
                      </div>
@@ -50,36 +50,28 @@
                         <div class="d-flex align-items-center px-3 pt-3">
                            <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="profile-img">
                            <div class="ms-3">
-                              <h6 class="mb-0 d-flex align-items-start text-body fs-6 fw-bold">Shay Jordon <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span></h6>
-                              <p class="text-muted mb-0">@shay-jordon</p>
+                              <h6 class="mb-0 d-flex align-items-start text-body fs-6 fw-bold" th:text="${user.name}">Shay Jordon <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span></h6>
                            </div>
                            <div class="ms-auto btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                              <input type="checkbox" class="btn-check" id="btncheck1">
-                              <label class="btn btn-outline-primary btn-sm px-3 rounded-pill" for="btncheck1"><span class="follow">+ Follow</span><span class="following d-none">Following</span></label>
+                              <div>
+                                 <input type="checkbox" class="btn-check" id="btncheck1">
+                                 <label class="btn btn-outline-primary btn-sm px-3 rounded-pill" for="btncheck1"><span class="follow">+ Follow</span><span class="following d-none">Following</span></label>
+                              </div>
                            </div>
                         </div>
                         <div class="p-3">
-                           <p class="mb-2 fs-6">The standard chunk of Lorem Ipsum used since is reproduced. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature..</p>
-                           <p class="d-flex align-items-center mb-3"><span class="material-icons me-2 rotate-320 text-muted md-16">link</span><a href="profile.html" class="text-decoration-none">profile/shayjordon</a>
-                              <span class="material-icons me-2 text-muted md-16 ms-4">calendar_today</span><span>Joined on Feb 2021</span>
+                           <p class="mb-2 fs-6"  th:text="${user.profile}">The standard chunk of Lorem Ipsum used since imb-0 d-flex align-items-start text-body fs-6 fw-bolds reproduced. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature..</p>
+<!--                           <p class="d-flex align-items-center mb-3" style="text-align: right"><label type="button" id="updateProfile">profile 수정</label>-->
                            </p>
                            <div class="d-flex followers">
                               <div>
-                                 <p class="mb-0">391k <span class="text-muted">Followers</span></p>
+                                 <p class="mb-0" th:text="${user.followerCount} + ' Followers'">391k <span class="text-muted">Followers</span></p>
                                  <div class="d-flex">
-                                    <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">
-                                    <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">
-                                    <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="follower-img">
-                                    <img src="img/rmate4.jpg" class="img-fluid rounded-circle" alt="follower-img">
-                                    <img src="img/rmate5.jpg" class="img-fluid rounded-circle" alt="follower-img">
                                  </div>
                               </div>
                               <div class="ms-5 ps-5">
-                                 <p class="mb-0">3 <span class="text-muted">Following</span></p>
+                                 <p class="mb-0" th:text="${user.followingCount} + ' Following'">3 <span class="text-muted">Following</span></p>
                                  <div class="d-flex">
-                                    <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">
-                                    <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">
-                                    <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="follower-img">
                                  </div>
                               </div>
                            </div>
@@ -87,16 +79,13 @@
                      </div>
                      <ul class="top-osahan-nav-tab nav nav-pills justify-content-center nav-justified mb-4 shadow-sm rounded-4 overflow-hidden bg-white mt-4" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                           <button class="p-3 nav-link text-muted active" id="pills-feed-tab" data-bs-toggle="pill" data-bs-target="#pills-feed" type="button" role="tab" aria-controls="pills-feed" aria-selected="true">Vogel(2)</button>
+                           <button class="p-3 nav-link text-muted active" id="pills-feed-tab" data-bs-toggle="pill" data-bs-target="#pills-feed" type="button" role="tab" aria-controls="pills-feed" aria-selected="true">Vogel</button>
                         </li>
                         <li class="nav-item" role="presentation">
                            <button class="p-3 nav-link text-muted" id="pills-people-tab" data-bs-toggle="pill" data-bs-target="#pills-people" type="button" role="tab" aria-controls="pills-people" aria-selected="false">Liked</button>
                         </li>
                         <li class="nav-item" role="presentation">
                            <button class="p-3 nav-link text-muted" id="pills-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending" aria-selected="false">Ree-Vogel</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                           <button class="p-3 nav-link text-muted" id="pills-mentions-tab" data-bs-toggle="pill" data-bs-target="#pills-mentions" type="button" role="tab" aria-controls="pills-mentions" aria-selected="false">Mentions</button>
                         </li>
                      </ul>
                      <div class="tab-content" id="pills-tabContent">
@@ -113,9 +102,8 @@
                                           <div class="w-100">
                                              <div class="d-flex align-items-center justify-content-between">
                                                 <a href="profile.html" class="text-decoration-none d-flex align-items-center">
-                                                   <h6 class="fw-bold mb-0 text-body">Shay Jordon</h6>
+                                                   <h6 class="fw-bold mb-0 text-body" th:text="${user.name}">Shay Jordon</h6>
                                                    <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
-                                                   <small class="text-muted ms-2">@shay-jordon</small>
                                                 </a>
                                                 <div class="d-flex align-items-center small">
                                                    <p class="text-muted mb-0" th:text = "${post.createdAt}">19 Feb</p>
@@ -149,70 +137,37 @@
                                                       <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
+                                                <div class="d-flex align-items-center mb-3">
                                                    <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                   <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
+                                                   <input type="text" class="form-control form-control-sm rounded-3 fw-light" name="saveComment" th:attrappend="postId=${post.id}" placeholder="Write Your comment">ㅍ
                                                 </div>
-                                                <div class="comments">
-                                                   <div class="d-flex mb-2">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
+
+                                                <div class="comments" th:each="comment : ${commentList}">
+
+                                                   <div class="d-flex mb-2" th:each="comment1 : ${comment}" th:if = "${comment1.postId == post.id} and ${comment1.isVisible}">
                                                       <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
                                                       </a>
                                                       <div class="ms-2 small">
-                                                         <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                            <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                               <p class="fw-500 mb-0">Macie Bellis</p>
-                                                               <span class="text-muted">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
-                                                            </div>
+                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
+                                                            <!--                                                         댓글 작성자 이름-->
+                                                            <p class="fw-500 mb-0" th:text="${comment1.name}">Macie Bellis</p>
+                                                            <span class="text-muted" th:text="${comment1.content}">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
+                                                         </div>
                                                          </a>
                                                          <div class="d-flex align-items-center ms-2">
-                                                            <a href="#" class="small text-muted text-decoration-none">Like</a>
+                                                            <a href="#" class="small text-muted text-decoration-none">Like <span th:text="${comment1.countLiked}"></span></a>
                                                             <span class="fs-3 text-muted material-icons mx-1">circle</span>
                                                             <a href="#" class="small text-muted text-decoration-none">Reply</a>
                                                             <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <span class="small text-muted">1h</span>
+                                                            <span class="small text-muted" th:text="${comment1.createdAt}">1h</span>
                                                          </div>
                                                       </div>
+                                                      <label th:if="${comment1.author} == ${userId}" type="button" style="text-align: right; width: 250px;" name="deleteComment" th:attrappend="commentId=${comment1.id}"> Delete
+                                                      </label>
                                                    </div>
-                                                   <div class="d-flex mb-2">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                      <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                      </a>
-                                                      <div class="ms-2 small">
-                                                         <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                            <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                               <p class="fw-500 mb-0">John Smith</p>
-                                                               <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
-                                                            </div>
-                                                         </a>
-                                                         <div class="d-flex align-items-center ms-2">
-                                                            <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                            <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                            <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <span class="small text-muted">20min</span>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                   <div class="d-flex mb-2">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                      <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                      </a>
-                                                      <div class="ms-2 small">
-                                                         <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                            <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                               <p class="fw-500 mb-0">Shay Jordon</p>
-                                                               <span class="text-muted">With our vastly improved notifications system, users have more control.</span>
-                                                            </div>
-                                                         </a>
-                                                         <div class="d-flex align-items-center ms-2">
-                                                            <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                            <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                            <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <span class="small text-muted">10min</span>
-                                                         </div>
-                                                      </div>
+                                                   <div>
+                                                      <!--                                             if문으로 댓글 갯수 확인 후 더보기 여부 결정-->
+                                                      <label type="button" class="more-comment" style="width: 100%;text-align: center;" current-comment-page="1" th:attrappend="postId=${post.id}"> More comments </label>
                                                    </div>
                                                 </div>
                                              </div>
@@ -220,601 +175,11 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <!-- Feed Item -->
 
                               </div>
                            </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-people" role="tabpanel" aria-labelledby="pills-people-tab">
-                           <!-- Feeds -->
-                           <div class="feeds">
-                              <!-- Feed Item -->
-                              <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
-                                 <div class="d-flex">
-                                    <img src="img/rmate3.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
-                                    <div class="d-flex ms-3 align-items-start w-100">
-                                       <div class="w-100">
-                                          <div class="d-flex align-items-center justify-content-between">
-                                             <a href="profile.html" class="text-decoration-none d-flex align-items-center">
-                                                <h6 class="fw-bold mb-0 text-body">Lucile Felmlee</h6>
-                                                <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
-                                                <small class="text-muted ms-2">@lucile-felmlee</small>
-                                             </a>
-                                             <div class="d-flex align-items-center small">
-                                                <p class="text-muted mb-0">19 Feb</p>
-                                                <div class="dropdown">
-                                                   <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
-                                                   <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
-                                                      <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="my-2">
-                                             <p>Scripserit eam ex, vis ad prompta mnesarchum, ad atqui suscipit vel. Omnis soluta ut mel, eum consequat adversarium definitionem ei. Sit cu elit laboramus similique, error exerci tacimates nam eu. Ferri eirmod latine ex sit. Cu nec munere viderer. Vix inermis periculis abhorreant te. Augue homero prompta eum eu, no est discere commune, velit mentitum vis ne.
-                                                🙂
-                                             </p>
-                                             <p class="text-dark">Happy Vogel to you!</p>
-                                             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                             <img src="img/post1.png" class="img-fluid rounded mb-3" alt="post-img">
-                                             </a>
-                                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <div>
-                                                   <a href="#" class="text-primary text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>30.4k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>4.0k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
-                                                </div>
-                                             </div>
-                                             <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
-                                             </div>
-                                             <div class="comments">
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Macie Bellis</p>
-                                                            <span class="text-muted">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">1h</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">John Smith</p>
-                                                            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">20min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Shay Jordon</p>
-                                                            <span class="text-muted">With our vastly improved notifications system, users have more control.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">10min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- Feed Item -->
-                              <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
-                                 <div class="d-flex">
-                                    <img src="img/rmate4.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
-                                    <div class="d-flex ms-3 align-items-start w-100">
-                                       <div class="w-100">
-                                          <div class="d-flex align-items-center justify-content-between">
-                                             <a href="profile.html" class="text-decoration-none d-flex align-items-center">
-                                                <h6 class="fw-bold mb-0 text-body">John Smith</h6>
-                                                <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
-                                                <small class="text-muted ms-2">@johnsmith</small>
-                                             </a>
-                                             <div class="d-flex align-items-center small">
-                                                <p class="text-muted mb-0">19 Feb</p>
-                                                <div class="dropdown">
-                                                   <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
-                                                   <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton4">
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
-                                                      <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="my-2">
-                                             <p>Nam malis menandri ea, facete debitis volumus est ut, commune placerat nominati ei sea. Labore alterum probatus no sed, ius ea quas iusto inermis, ex tantas populo nonumes nam. Quo ad verear copiosae gubergren, quis commodo est et. </p>
-                                             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                             <img src="img/post2.png" class="img-fluid rounded mb-3" alt="post-img">
-                                             </a>
-                                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <div>
-                                                   <a href="#" class="text-primary text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>30.4k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>4.0k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-primary text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
-                                                </div>
-                                             </div>
-                                             <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
-                                             </div>
-                                             <div class="comments">
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Macie Bellis</p>
-                                                            <span class="text-muted">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">1h</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">John Smith</p>
-                                                            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">20min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Shay Jordon</p>
-                                                            <span class="text-muted">With our vastly improved notifications system, users have more control.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">10min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
-                           <!-- Feeds -->
-                           <div class="feeds">
-                              <!-- Feed Item -->
-                              <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
-                                 <div class="d-flex">
-                                    <img src="img/rmate4.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
-                                    <div class="d-flex ms-3 align-items-start w-100">
-                                       <div class="w-100">
-                                          <div class="d-flex align-items-center justify-content-between">
-                                             <a href="profile.html" class="text-decoration-none d-flex align-items-center">
-                                                <h6 class="fw-bold mb-0 text-body">John Smith</h6>
-                                                <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
-                                                <small class="text-muted ms-2">@johnsmith</small>
-                                             </a>
-                                             <div class="d-flex align-items-center small">
-                                                <p class="text-muted mb-0">19 Feb</p>
-                                                <div class="dropdown">
-                                                   <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
-                                                   <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton5">
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
-                                                      <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="my-2">
-                                             <p>Nam malis menandri ea, facete debitis volumus est ut, commune placerat nominati ei sea. Labore alterum probatus no sed, ius ea quas iusto inermis, ex tantas populo nonumes nam. Quo ad verear copiosae gubergren, quis commodo est et. </p>
-                                             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                             <img src="img/post2.png" class="img-fluid rounded mb-3" alt="post-img">
-                                             </a>
-                                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>30.4k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>4.0k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-primary text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
-                                                </div>
-                                             </div>
-                                             <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
-                                             </div>
-                                             <div class="comments">
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Macie Bellis</p>
-                                                            <span class="text-muted">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">1h</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">John Smith</p>
-                                                            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">20min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Shay Jordon</p>
-                                                            <span class="text-muted">With our vastly improved notifications system, users have more control.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">10min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-mentions" role="tabpanel" aria-labelledby="pills-mentions-tab">
-                           <!-- Feeds -->
-                           <div class="feeds">
-                              <!-- Feed Item -->
-                              <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
-                                 <div class="d-flex">
-                                    <img src="img/rmate2.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
-                                    <div class="d-flex ms-3 align-items-start w-100">
-                                       <div class="w-100">
-                                          <div class="d-flex align-items-center justify-content-between">
-                                             <a href="profile.html" class="text-decoration-none d-flex align-items-center">
-                                                <h6 class="fw-bold mb-0 text-body">Shay Jordon</h6>
-                                                <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
-                                                <small class="text-muted ms-2">@shay-jordon</small>
-                                             </a>
-                                             <div class="d-flex align-items-center small">
-                                                <p class="text-muted mb-0">19 Feb</p>
-                                                <div class="dropdown">
-                                                   <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
-                                                   <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton6">
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
-                                                      <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="my-2">
-                                             <p class="mb-3 text-primary">Welcome to the Vogel family 🙂</p>
-                                             <p>Happy Vogel to you!</p>
-                                             <p class="mb-2"><a href="#" class="text-decoration-none">#SelectricsM12</a> <a href="#" class="text-decoration-none">#supriuasule</a> <a href="#" class="text-decoration-none">#support</a></p>
-                                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>30.4k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>4.0k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-primary text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
-                                                </div>
-                                             </div>
-                                             <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
-                                             </div>
-                                             <div class="comments">
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Macie Bellis</p>
-                                                            <span class="text-muted">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">1h</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">John Smith</p>
-                                                            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">20min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Shay Jordon</p>
-                                                            <span class="text-muted">With our vastly improved notifications system, users have more control.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">10min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- Feed Item -->
-                              <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
-                                 <div class="d-flex">
-                                    <img src="img/rmate4.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
-                                    <div class="d-flex ms-3 align-items-start w-100">
-                                       <div class="w-100">
-                                          <div class="d-flex align-items-center justify-content-between">
-                                             <a href="profile.html" class="text-decoration-none d-flex align-items-center">
-                                                <h6 class="fw-bold mb-0 text-body">John Smith</h6>
-                                                <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
-                                                <small class="text-muted ms-2">@johnsmith</small>
-                                             </a>
-                                             <div class="d-flex align-items-center small">
-                                                <p class="text-muted mb-0">19 Feb</p>
-                                                <div class="dropdown">
-                                                   <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
-                                                   <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton7">
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
-                                                      <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
-                                                      <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="my-2">
-                                             <p>Nam malis menandri ea, facete debitis volumus est ut, commune placerat nominati ei sea. Labore alterum probatus no sed, ius ea quas iusto inermis, ex tantas populo nonumes nam. Quo ad verear copiosae gubergren, quis commodo est et. </p>
-                                             <p class="mb-2"><a href="#" class="text-decoration-none">#SelectricsM12</a> <a href="#" class="text-decoration-none">#supriuasule</a> <a href="#" class="text-decoration-none">#support</a></p>
-                                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>30.4k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>4.0k</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-primary text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
-                                                </div>
-                                                <div>
-                                                   <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
-                                                </div>
-                                             </div>
-                                             <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
-                                             </div>
-                                             <div class="comments">
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Macie Bellis</p>
-                                                            <span class="text-muted">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">1h</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">John Smith</p>
-                                                            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">20min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                   <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="commenters-img">
-                                                   </a>
-                                                   <div class="ms-2 small">
-                                                      <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                         <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
-                                                            <p class="fw-500 mb-0">Shay Jordon</p>
-                                                            <span class="text-muted">With our vastly improved notifications system, users have more control.</span>
-                                                         </div>
-                                                      </a>
-                                                      <div class="d-flex align-items-center ms-2">
-                                                         <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <a href="#" class="small text-muted text-decoration-none">Reply</a>
-                                                         <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                         <span class="small text-muted">10min</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+
                      </div>
                   </div>
                   <div class="text-center mt-4">

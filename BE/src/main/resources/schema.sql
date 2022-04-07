@@ -95,6 +95,7 @@ CREATE TABLE friend_tag
     tag_name VARCHAR(255) NOT NULL,
     user_id BIGINT NOT NULL, -- users table (id)
     post_id BIGINT NOT NULL, -- post table
+--     disable 추가
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(post_id) REFERENCES post(id)
@@ -106,6 +107,7 @@ create table hash_tag (
     tag_content VARCHAR(255) NOT NULL,
     post_id BIGINT, -- post table
     comment_id BIGINT, -- comment table
+    --     disable 추가
     PRIMARY KEY(id),
     FOREIGN KEY(comment_id) REFERENCES comment(id)
 );

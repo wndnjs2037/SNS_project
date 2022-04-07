@@ -220,10 +220,10 @@
                         <!-- Feeds -->
                         <div class="pt-4 feeds" id="feed" th:each="post :${postList}" th:if="${post.isVisible}">
                            <!-- Feed Item -->
-                           <!--                        post.isVisible이 true인 것만 보여줘야 함-->
                            <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
                               <input type="hidden" name="postId" th:value = "${post.id}" >
                               <div class="d-flex">
+<!--                                 src : 이미지 절대 경로 -->
                                  <img src="img/rmate2.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
                                  <div class="d-flex ms-3 align-items-start w-100">
                                     <div class="w-100">
@@ -281,7 +281,7 @@
                                                 <div class="ms-2 small">
                                                    <div class="bg-light px-3 py-2 rounded-4 mb-1 chat-text">
                                                       <!--                                                         댓글 작성자 이름-->
-                                                      <p class="fw-500 mb-0" >Macie Bellis</p>
+                                                      <p class="fw-500 mb-0" th:text="${comment1.name}">Macie Bellis</p>
                                                       <span class="text-muted" th:text="${comment1.content}">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor.</span>
                                                    </div>
                                                    </a>
@@ -301,7 +301,6 @@
                                                 <label type="button" class="more-comment" style="width: 100%;text-align: center;"> 더 보 기 </label>
                                              </div>
                                           </div>
-
                                        </div>
                                     </div>
                                  </div>

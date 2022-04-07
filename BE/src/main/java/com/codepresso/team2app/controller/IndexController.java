@@ -82,9 +82,21 @@ public class IndexController {
     long userId = myId;
     List<Post> postList = postService.getFindByAuthor(id);
     User user = userService.findById(id);
+
+    List<List<Comment>> commentList = new ArrayList<>();
+    for(int i = 0; i < postList.size(); i++){
+      long postId = postList.get(i).getId();
+      List<Comment> comments = commentService.getFindPostCommentByPage(postId, 0, 3);
+      while(!comments.isEmpty()){
+        commentList.add(comments);
+        break;
+      }
+    }
+
     model.addAttribute("user", user);
     model.addAttribute("postList", postList);
     model.addAttribute("myId", myId);
+    model.addAttribute("commentList", commentList);
     return "profile";
   }
 
